@@ -1,10 +1,10 @@
 #Hangman
 #Author: John Botonakis
 #Built with help from youtube.com/@TokyoEdTech
+#ChatGPT used strictly for code comments only
 
 import os
 import random
-import time
 from HangedMan import HANGMANPICS as hm
 import Helpers
 
