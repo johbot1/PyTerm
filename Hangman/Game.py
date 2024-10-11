@@ -95,6 +95,7 @@ def playgame():
                 print(f"Woo-hoo! You did it! You've guessed the word: {active_word.upper()} in {total_guesses} guesses!")
                 playing = False
                 break
+
         elif playerguess in progress:
             print("You already guessed that letter! Try again")
 
