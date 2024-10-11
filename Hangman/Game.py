@@ -130,7 +130,7 @@ def playgame():
 def main():
     while True:
         # Clear the screen
-        os.system("Clear")
+        os.system('cls')
         playgame()
 
         while True:
