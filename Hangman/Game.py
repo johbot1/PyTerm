@@ -7,7 +7,7 @@ import os
 import random
 import time
 
-from HangedMan import HANGMANPICS as hm, finalchance as finalchance
+from HangedMan import HANGMANPICS as hm
 import Helpers
 from Hangman.Helpers import gameOver
 
@@ -105,16 +105,18 @@ while playing:
         hanged_state += 1
 
         #Check if we have reached the end of the drawings:
-        if hanged_state <=len(hm)-2:
+        if hanged_state <len(hm)-1:
             gallows = hm[hanged_state] #Update the hangman
             time.sleep(0.5)
-            #If this is the last guess, inform the player and wait a second so they understand this is the last guess
-            if hanged_state == finalchance:
+            # If this is the last guess, inform the player and wait a second so they understand this is the last guess
+            if hanged_state == len(hm)-2:
                 print("ONE GUESS LEFT! Make it count!!")
                 time.sleep(2)
+
         #But if that was the last guess, kill em.
-        elif hanged_state == len(hm):
+        elif hanged_state == len(hm)-1:
             print(hm[hanged_state])
+            print("GAME OVER!")
             playing = False
             break
             #Game over!

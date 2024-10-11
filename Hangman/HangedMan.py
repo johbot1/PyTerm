@@ -60,5 +60,3 @@ HANGMANPICS = ['''
       |
 =========''']
 
-#Last guess before losing!
-finalchance = (len(HANGMANPICS)-1)
