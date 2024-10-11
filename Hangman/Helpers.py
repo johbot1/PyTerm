@@ -22,10 +22,3 @@ def rules():
     time.sleep(2)
 
 
-def gameOver():
-    print("Game Over!")
-    time.sleep(0.5)
-    print("You've killed a man. How could you?")
-    while True:
-        tryagain = input("Would you like to try again? 1) Yes! 2) No! ")
-        return tryagain

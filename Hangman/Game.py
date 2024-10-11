@@ -9,7 +9,7 @@ import time
 
 from HangedMan import HANGMANPICS as hm
 import Helpers
-from Hangman.Helpers import gameOver
+
 
 #Clear the screen
 os.system("Clear")
@@ -114,9 +114,18 @@ while playing:
                 time.sleep(2)
 
         #But if that was the last guess, kill em.
+        #Game over!
         elif hanged_state == len(hm)-1:
             print(hm[hanged_state])
             print("GAME OVER!")
+            print("You've killed a man. How could you?")
+            time.sleep(2)
             playing = False
             break
-            #Game over!
+
+while True:
+    tryagain = int(input("Would you like to try again? 1) Yes! 2) No!\n"))
+    if tryagain == 1:
+        print("Great!")
+        input("\nPress Enter to begin...")
+        playing = True
