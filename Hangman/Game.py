@@ -36,7 +36,7 @@ print(hanged_state)
 
 # Create and display the underscores for the word to be guessed
 word_display = "_ " * len(active_word)
-print(word_display.strip())  # Use .strip() to remove the trailing space
+print(word_display.strip())
 
 playerguess = input(f"GUESS: ")
 
