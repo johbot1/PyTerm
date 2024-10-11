@@ -9,15 +9,24 @@ import time
 
 from HangedMan import HANGMANPICS as hm, finalchance as finalchance
 import Helpers
-
+from Hangman.Helpers import gameOver
 
 #Clear the screen
 os.system("Clear")
 
-#Intialize the Game
-active_word = Helpers.wordbank[random.randint(0, len(Helpers.wordbank) - 1)]
+#Intialize the Game Parts
+
+#Choose a random word from the wordbank
+active_word = Helpers.wordbank[random.randint(0, len(Helpers.wordbank) - 1)].lower()
+#Initialize the guessing field that is the same length as the active word
 guess_field = len(active_word)
+
+#Creates a list of underscores for every letter in that active word
+progress = ['_'] * guess_field
+
+#The state of the current hangman before a guess
 hanged_state = 0
+#Responsible for the hangman drawing
 gallows = hm[hanged_state]
 
 
@@ -58,40 +67,54 @@ while True:
 
 
 print("Great!")
-input("Press Enter to begin...")
+input("\nPress Enter to begin...")
 playing = True
-
 
 #MAIN LOOP
 while playing:
     # Print the initial state of the hangman and the word in underscores
     print(gallows)
 
-    # Create and display the underscores for the word to be guessed
-    word_display = "_ " * guess_field
-    print(word_display.strip())
+    # Create and display the current underscore progress for the word to be guessed
+    print(" ".join(progress))
 
     #Player input validation (Only letters, nothing else)
     while True:
-        playerguess = input(f"GUESS: ")
+        playerguess = input(f"GUESS: ").lower()
         if len(playerguess) == 1 and playerguess.isalpha():
             break
         else:
             print("Whoops! Please enter a valid guess. That's one letter at a time!")
 
-   #Guess is WRONG
+    #Guess is RIGHT
+    if playerguess.lower() in active_word and playerguess not in progress:
+        #Update the progress in the GUESS field with the letter in the correct position
+        for index, letter in enumerate(active_word):
+            if letter == playerguess:
+                progress[index] = playerguess #Replaces the underscores with the letter guessed
+        if "_" not in progress:
+            print(f"Woo-hoo! You did it! You've guessed the word: {active_word.upper()} in {hanged_state} guesses!")
+            playing = False
+            break
+    elif playerguess in progress:
+        print("You already guessed that letter! Try again")
+
+    #Guess is WRONG
     if playerguess.lower() not in active_word.lower():
         # Increment the hanged state to reflect bad guess
         hanged_state += 1
 
         #Check if we have reached the end of the drawings:
-        if hanged_state <len(hm)-2:
+        if hanged_state <=len(hm)-2:
             gallows = hm[hanged_state] #Update the hangman
             time.sleep(0.5)
+            #If this is the last guess, inform the player and wait a second so they understand this is the last guess
             if hanged_state == finalchance:
                 print("ONE GUESS LEFT! Make it count!!")
                 time.sleep(2)
-        elif hanged_state == len(hm)-1:
+        #But if that was the last guess, kill em.
+        elif hanged_state == len(hm):
             print(hm[hanged_state])
+            playing = False
             break
             #Game over!

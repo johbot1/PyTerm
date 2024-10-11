@@ -8,6 +8,7 @@ import time
 wordbank = ['Macintosh', 'Linux', 'Windows', 'Malware', 'Python', 'Java', 'Technology',
             'Manjaro', 'Binary', 'Algorithm', 'Xenon', 'MOFSET', 'Debug']
 
+
 def rules():
     print("No problem! Here's how to play...")
     time.sleep(2)
@@ -20,3 +21,11 @@ def rules():
     print("Solve the word before running out of guesses and you win!")
     time.sleep(2)
 
+
+def gameOver():
+    print("Game Over!")
+    time.sleep(0.5)
+    print("You've killed a man. How could you?")
+    while True:
+        tryagain = input("Would you like to try again? 1) Yes! 2) No! ")
+        return tryagain
