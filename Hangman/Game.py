@@ -53,6 +53,8 @@ def playgame():
                             #If we don't need to repeat the instructions, continue with the game
                             if rulecheck2 == 2:
                                 break
+                            elif rulecheck2 == 1:
+                                #Repeat Instructions goes here
                             else:
                                 print("Please enter 1 for Yes, repeat the instructions; 2 for No, do not repeat the instructions..")
                         except ValueError:
