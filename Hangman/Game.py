@@ -54,7 +54,7 @@ def playgame():
                             if rulecheck2 == 2:
                                 break
                             elif rulecheck2 == 1:
-                                #Repeat Instructions goes here
+                                Helpers.rules()
                             else:
                                 print("Please enter 1 for Yes, repeat the instructions; 2 for No, do not repeat the instructions..")
                         except ValueError:
