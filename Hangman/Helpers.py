@@ -1,14 +1,16 @@
-#Helpers
-#Author: John Botonakis
-#Description: A seperate file for functions and the word bank
+# Helpers
+# Author: John Botonakis
+# Description: A seperate file for functions and the word bank
 
 import time
 
-#Word Bank
+# Word Bank
 wordbank = ['Macintosh', 'Linux', 'Windows', 'Malware', 'Python', 'Java', 'Technology',
             'Manjaro', 'Binary', 'Algorithm', 'Xenon', 'MOFSET', 'Debug']
 
 
+# Rules:
+# This is a terminal based "cutscene" to describe to the players how to play
 def rules():
     print("No problem! Here's how to play...")
     time.sleep(2)
@@ -20,5 +22,3 @@ def rules():
     time.sleep(2)
     print("Solve the word before running out of guesses and you win!")
     time.sleep(2)
-
-
