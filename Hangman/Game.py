@@ -72,6 +72,9 @@ def playgame():
     # Amount of total guesses the player has made
     total_guesses = 0
 
+    #Keep track of previous guesses
+    prev_guessed_letters = []
+
     print("Great!\n")
     input("Press Enter to begin...")
     playing = True
@@ -87,6 +90,8 @@ def playgame():
             playerguess = input('GUESS: ').lower()
             if len(playerguess) == 1 and playerguess.isalpha():
                 total_guesses += 1
+                prev_guessed_letters.append(playerguess)
+                print('PREVIOUS:', *prev_guessed_letters)
                 break
             else:
                 print("Whoops! Please enter a valid guess. That's one letter at a time!")
@@ -105,6 +110,7 @@ def playgame():
                 break
         elif playerguess in progress:
             print("You already guessed that letter! Try again")
+            prev_guessed_letters.remove(playerguess)
 
         # If the guess is incorrect, the state of the hanged man will increase.
         # If the state reaches it's second to last drawing, it will warn the player
@@ -126,7 +132,7 @@ def playgame():
                 break
 
 
-# Main Function:
+# main:
 # Sets up the game in a playing loop. Once the loop is exited
 # from either winning or losing, it prompts the user to play again or quit out.
 # Printouts confirm each choice, along with input validation.
