@@ -21,36 +21,45 @@ from HangedMan import HANGMANPICS as hm
 #This function plays before the game to ask for a name, as well as
 #introduce how to play Hangman for those unfamiliar
 def start_preamble():
+    preamble_state = True
+    special_characters = "!@#$%^&*()-+?_=,<>/''"""
+
     # Player Name input with validation for only alphabetical characters
-    name = input("Enter your name: ")
-    if name.isalpha():
-        print(f"Welcome to Hangman {name.capitalize()}!")
-    else:
-        print("Whoops! Please enter a valid name using only the alphabet; No numbers.")  # TODO: Edit for !@#%#$^$&!
-    try:
-        rulecheck = int(input("Do you know the rules of Hangman?: 1) Yes 2) No  "))
-        if rulecheck == 1:
-            pass
-        elif rulecheck == 2:
-            Helpers.rules()
-            while True:
-                try:
-                    rulecheck2 = int(input("Shall I repeat these instructions?: 1) Yes 2) No "))
-                    if rulecheck2 == 2:
-                        break
-                    elif rulecheck2 == 1:
-                        Helpers.rules()
-                    else:
+    while preamble_state:
+        name = input("Enter your name: ")
+        if name.isalpha():
+            print(f"Welcome to Hangman {name.capitalize()}!")
+            break
+        elif name.isnumeric():
+            print("Whoops! Please enter a valid name without numbers")
+        elif any(c in special_characters for c in name):
+            print("Looks like you got some funky characters. Only letters please.")
+
+    while preamble_state:
+        try:
+            rulecheck = int(input("Do you know the rules of Hangman?: \n1) Yes 2) No  "))
+            if rulecheck == 1:
+                break
+            elif rulecheck == 2:
+                Helpers.rules()
+                while True:
+                    try:
+                        rulecheck2 = int(input("Shall I repeat these instructions?:\n1) Yes 2) No "))
+                        if rulecheck2 == 2:
+                            break
+                        elif rulecheck2 == 1:
+                            Helpers.rules()
+                        else:
+                            print(
+                                "Please enter 1 for Yes, repeat the instructions; 2 for No, do not repeat the "
+                                "instructions..")
+                    except ValueError:
                         print(
-                            "Please enter 1 for Yes, repeat the instructions; 2 for No, do not repeat the "
-                            "instructions..")
-                except ValueError:
-                    print(
-                        "Please enter 1 for Yes, repeat the instructions; 2 for No, do not repeat the instructions.")
-        else:
-            print("Please select 1 for Yes and 2 for No.")
-    except ValueError:
-        print("Please enter 1 for Yes, 2 for No.")
+                            "Please enter 1 for Yes, repeat the instructions; 2 for No, do not repeat the instructions.")
+            else:
+                print("Please select 1 for Yes and 2 for No.")
+        except ValueError:
+            print("Please enter 1 for Yes, 2 for No.")
 
 
 # Initializes the entire game
@@ -84,6 +93,7 @@ def playgame():
         # Prints the gallows and underscores for visual display
         print(gallows)
         print(" ".join(progress))
+        print('PREVIOUS:', *prev_guessed_letters)
 
         # Input validation to ensure the player guess is only alphabetical
         while True:
@@ -91,7 +101,6 @@ def playgame():
             if len(playerguess) == 1 and playerguess.isalpha():
                 total_guesses += 1
                 prev_guessed_letters.append(playerguess)
-                print('PREVIOUS:', *prev_guessed_letters)
                 break
             else:
                 print("Whoops! Please enter a valid guess. That's one letter at a time!")
@@ -111,6 +120,9 @@ def playgame():
         elif playerguess in progress:
             print("You already guessed that letter! Try again")
             prev_guessed_letters.remove(playerguess)
+
+
+
 
         # If the guess is incorrect, the state of the hanged man will increase.
         # If the state reaches it's second to last drawing, it will warn the player
@@ -137,6 +149,7 @@ def playgame():
 # from either winning or losing, it prompts the user to play again or quit out.
 # Printouts confirm each choice, along with input validation.
 def main():
+    os.system('clear')
     start_preamble()
     while True:
         # Clear the screen
