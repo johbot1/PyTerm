@@ -13,7 +13,7 @@ from HangedMan import HANGMANPICS as hm
 #FEEDBACK
 #DONE  While replaying just start the game not enter name/learn to play
 #   Numbers and incorrect feedback handled by the input
-#   Put all previously guessed letters alphabetically on the screen with every input
+#DONE   Put all previously guessed letters alphabetically on the screen with every input
 #DONE   Clean up github (.gitignore should be top level, remove .idea)
 #DONE   Instructions on running in terminal on README
 
@@ -102,8 +102,8 @@ def playgame():
                 total_guesses += 1
                 prev_guessed_letters.append(playerguess)
                 break
-            else:
-                print("Whoops! Please enter a valid guess. That's one letter at a time!")
+            elif playerguess.isnumeric():
+                print("Sorry, this is a letters only game. No numbers!")
 
         # If the guess is correct, it will update the field with the correct letter, in the correct position
         if playerguess.lower() in active_word and playerguess not in progress:
