@@ -9,18 +9,20 @@ import time
 import Helpers
 from HangedMan import HANGMANPICS as hm
 
+# FEEDBACK
+# DONE  While replaying just start the game not enter name/learn to play
+# DONE   Numbers and incorrect feedback handled by the input
+# DONE   Put all previously guessed letters alphabetically on the screen with every input
+# DONE   Clean up github (.gitignore should be top level, remove .idea)
+# DONE   Instructions on running in terminal on README
+
 global special_characters
 special_characters = "!@#$%^&*()-+?_=,<>/;:{}\|=+`~''"""
-#FEEDBACK
-#DONE  While replaying just start the game not enter name/learn to play
-#DONE   Numbers and incorrect feedback handled by the input
-#DONE   Put all previously guessed letters alphabetically on the screen with every input
-#DONE   Clean up github (.gitignore should be top level, remove .idea)
-#DONE   Instructions on running in terminal on README
 
-#start_preamble()
-#This function plays before the game to ask for a name, as well as
-#introduce how to play Hangman for those unfamiliar
+
+# start_preamble()
+# This function plays before the game to ask for a name, as well as
+# introduce how to play Hangman for those unfamiliar
 def start_preamble():
     preamble_state = True
     # Player Name input with validation for only alphabetical characters
@@ -81,7 +83,7 @@ def playgame():
     # Amount of total guesses the player has made
     total_guesses = 0
 
-    #Keep track of previous guesses
+    # Keep track of previous guesses
     prev_guessed_letters = []
 
     print("Great!\n")
@@ -108,13 +110,12 @@ def playgame():
             elif playerguess in progress_field or playerguess in prev_guessed_letters:
                 print("You already guessed that letter! Try again")
 
-            elif len(playerguess) >1:
-                    print("Appreciate your enthusiasm partner, but one letter at a time!")
+            elif len(playerguess) > 1:
+                print("Appreciate your enthusiasm partner, but one letter at a time!")
             elif len(playerguess) == 1 and playerguess.isalpha():
                 total_guesses += 1
                 prev_guessed_letters.append(playerguess)
                 break
-
 
         # If the guess is correct, it will update the field with the correct letter, in the correct position
         if playerguess.lower() in active_word and playerguess not in progress_field:
@@ -128,8 +129,6 @@ def playgame():
                     f"Woo-hoo! You did it! You've guessed the word: {active_word.upper()} in {total_guesses} guesses!")
                 playing = False
                 break
-
-
 
         # If the guess is incorrect, the state of the hanged man will increase.
         # If the state reaches it's second to last drawing, it will warn the player
