@@ -1,6 +1,6 @@
 # Helpers
 # Author: John Botonakis
-# Description: A seperate file for functions and the word bank
+# Description: A separate file for functions and the word bank
 
 import time
 

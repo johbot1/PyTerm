@@ -10,6 +10,13 @@ import Helpers
 from HangedMan import HANGMANPICS as hm
 
 
+#FEEDBACK
+#   While replaying just start the game not enter name/learn to play
+#   Numbers and incorrect feedback handled by the input
+#   Put all previously guessed letters alphabetically on the screen with every input
+#   Clean up github (.gitignore should be top level, remove .idea)
+#DONE   Instructions on running in terminal on README
+
 # Initializes the entire game
 def playgame():
     # Randomly select a word from a word bank as the active word to guess for
@@ -19,10 +26,10 @@ def playgame():
     guess_field = len(active_word)
 
     # Populates the guess_field with underscores to represent each letter of active_word
-    progress = ['_'] * guess_field
+    progress = ['_'] * guess_field #TODO: Change to Guess_field_length
 
     # Current hangman state; references the drawings in HangedMan.py
-    hanged_state = 0
+    hanged_state = 0 #TODO: Hanged_state_index opposed to just "state"
     # Area for storing/displaying the hangman ascii art
     gallows = hm[hanged_state]
 
@@ -36,20 +43,20 @@ def playgame():
             print(f"Welcome to Hangman {name.capitalize()}!")
             break
         else:
-            print("Whoops! Please enter a valid name using only the alphabet; No numbers.")
+            print("Whoops! Please enter a valid name using only the alphabet; No numbers.") #TODO: Edit for !@#%#$^$&!
 
     # Displaying the rules via a dialogue tree. Each section has its own
     # validation to ensure the player does not enter anything aside from numbers.
     while True:
         try:
-            rulecheck = int(input("Do you know the rules of Hangman? 1) Yes 2) No  "))
+            rulecheck = int(input("Do you know the rules of Hangman? 1) Yes 2) No  ")) #TODO: Consistency with ":"
             if rulecheck == 1:
                 break
             elif rulecheck == 2:
                 Helpers.rules()
                 while True:
                     try:
-                        rulecheck2 = int(input("Shall I repeat these instructions? 1) Yes 2) No "))
+                        rulecheck2 = int(input("Shall I repeat these instructions? 1) Yes 2) No ")) #TODO: Consistency with ":"
                         if rulecheck2 == 2:
                             break
                         elif rulecheck2 == 1:
@@ -66,8 +73,8 @@ def playgame():
         except ValueError:
             print("Please enter 1 for Yes, 2 for No.")
 
-    print("Great!")
-    input("\nPress Enter to begin...")
+    print("Great!\n")
+    input("Press Enter to begin...")
     playing = True
 
     # MAIN LOOP
@@ -78,7 +85,7 @@ def playgame():
 
         # Input validation to ensure the player guess is only alphabetical
         while True:
-            playerguess = input(f"GUESS: ").lower()
+            playerguess = input(f"GUESS: ").lower() #TODO: fString sometimes? FIX
             if len(playerguess) == 1 and playerguess.isalpha():
                 total_guesses += 1
                 break
@@ -127,7 +134,7 @@ def playgame():
 def main():
     while True:
         # Clear the screen
-        os.system('cls')
+        os.system('clear') #TODO: Fix
         playgame()
 
         while True:
