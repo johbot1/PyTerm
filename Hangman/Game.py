@@ -9,7 +9,8 @@ import time
 import Helpers
 from HangedMan import HANGMANPICS as hm
 
-
+global special_characters
+special_characters = "!@#$%^&*()-+?_=,<>/''"""
 #FEEDBACK
 #DONE  While replaying just start the game not enter name/learn to play
 #   Numbers and incorrect feedback handled by the input
@@ -22,8 +23,6 @@ from HangedMan import HANGMANPICS as hm
 #introduce how to play Hangman for those unfamiliar
 def start_preamble():
     preamble_state = True
-    special_characters = "!@#$%^&*()-+?_=,<>/''"""
-
     # Player Name input with validation for only alphabetical characters
     while preamble_state:
         name = input("Enter your name: ")
@@ -104,6 +103,8 @@ def playgame():
                 break
             elif playerguess.isnumeric():
                 print("Sorry, this is a letters only game. No numbers!")
+            elif any(c in special_characters for c in playerguess):
+                print("Looks like you got some funky characters. Only letters please!")
 
         # If the guess is correct, it will update the field with the correct letter, in the correct position
         if playerguess.lower() in active_word and playerguess not in progress:
