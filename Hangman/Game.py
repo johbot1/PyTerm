@@ -10,10 +10,10 @@ import Helpers
 from HangedMan import HANGMANPICS as hm
 
 global special_characters
-special_characters = "!@#$%^&*()-+?_=,<>/''"""
+special_characters = "!@#$%^&*()-+?_=,<>/;:{}\|=+`~''"""
 #FEEDBACK
 #DONE  While replaying just start the game not enter name/learn to play
-#   Numbers and incorrect feedback handled by the input
+#DONE   Numbers and incorrect feedback handled by the input
 #DONE   Put all previously guessed letters alphabetically on the screen with every input
 #DONE   Clean up github (.gitignore should be top level, remove .idea)
 #DONE   Instructions on running in terminal on README
@@ -36,7 +36,7 @@ def start_preamble():
 
     while preamble_state:
         try:
-            rulecheck = int(input("Do you know the rules of Hangman?: \n1) Yes 2) No  "))
+            rulecheck = int(input("Do you know the rules of Hangman?:\n1) Yes 2) No  "))
             if rulecheck == 1:
                 break
             elif rulecheck == 2:
@@ -50,15 +50,16 @@ def start_preamble():
                             Helpers.rules()
                         else:
                             print(
-                                "Please enter 1 for Yes, repeat the instructions; 2 for No, do not repeat the "
-                                "instructions..")
+                                "Please enter:\n1 for Yes, repeat the instructions; 2 for No, do not repeat the "
+                                "instructions ")
                     except ValueError:
                         print(
-                            "Please enter 1 for Yes, repeat the instructions; 2 for No, do not repeat the instructions.")
+                            "Please enter:\n1 for Yes, repeat the instructions; 2 for No, do not repeat the "
+                            "instructions.")
             else:
-                print("Please select 1 for Yes and 2 for No.")
+                print("Please select:\n1 for Yes and 2 for No ")
         except ValueError:
-            print("Please enter 1 for Yes, 2 for No.")
+            print("Please enter:\n1 for Yes, 2 for No ")
 
 
 # Initializes the entire game
@@ -70,7 +71,7 @@ def playgame():
     guess_field_length = len(active_word)
 
     # Populates the guess_field_length with underscores to represent each letter of active_word
-    progress = ['_'] * guess_field_length
+    progress_field = ['_'] * guess_field_length
 
     # Current hangman state; references the drawings in HangedMan.py
     hanged_state_index = 0
@@ -91,37 +92,42 @@ def playgame():
     while playing:
         # Prints the gallows and underscores for visual display
         print(gallows)
-        print(" ".join(progress))
+        print(" ".join(progress_field))
+        prev_guessed_letters.sort()
         print('PREVIOUS:', *prev_guessed_letters)
 
         # Input validation to ensure the player guess is only alphabetical
         while True:
             playerguess = input('GUESS: ').lower()
-            if len(playerguess) == 1 and playerguess.isalpha():
-                total_guesses += 1
-                prev_guessed_letters.append(playerguess)
-                break
-            elif playerguess.isnumeric():
+            if playerguess.isnumeric():
                 print("Sorry, this is a letters only game. No numbers!")
+
             elif any(c in special_characters for c in playerguess):
                 print("Looks like you got some funky characters. Only letters please!")
 
+            elif playerguess in progress_field or playerguess in prev_guessed_letters:
+                print("You already guessed that letter! Try again")
+
+            elif len(playerguess) >1:
+                    print("Appreciate your enthusiasm partner, but one letter at a time!")
+            elif len(playerguess) == 1 and playerguess.isalpha():
+                total_guesses += 1
+                prev_guessed_letters.append(playerguess)
+                break
+
+
         # If the guess is correct, it will update the field with the correct letter, in the correct position
-        if playerguess.lower() in active_word and playerguess not in progress:
+        if playerguess.lower() in active_word and playerguess not in progress_field:
             for index, letter in enumerate(active_word):
                 if letter == playerguess:
-                    progress[index] = playerguess  # Replaces the underscores with the letter guessed
+                    progress_field[index] = playerguess  # Replaces the underscores with the letter guessed
             # Once there are no more spaces to put corrected letters, the game infers you have won
             # displaying your word, and the amount of guesses it took you to solve it.
-            if "_" not in progress:
+            if "_" not in progress_field:
                 print(
                     f"Woo-hoo! You did it! You've guessed the word: {active_word.upper()} in {total_guesses} guesses!")
                 playing = False
                 break
-        elif playerguess in progress:
-            print("You already guessed that letter! Try again")
-            prev_guessed_letters.remove(playerguess)
-
 
 
 
@@ -157,14 +163,14 @@ def main():
         os.system('clear')
         playgame()
         while True:
-            tryagain = input("Would you like to try again? 1) Yes! 2) No!\n")
+            tryagain = input("Would you like to try again?:\n1) Yes! 2) No! ")
             if tryagain == '1':
                 break
             elif tryagain == '2':
                 print("Hope you had fun, Partner! See ya when I see ya!")
                 return  # Exit
             else:
-                print("Please enter 1 for Yes, 2 for No.")
+                print("Please enter:\n1 for Yes, 2 for No ")
 
 
 # Start the game
