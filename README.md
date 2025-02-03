@@ -3,5 +3,6 @@ One of three Python related projects for my final semester, this terminal based 
 
 
 # To Run:
-Download the files and open the directory in your terminal. Run the following command to begin:
+Download the files and open the directory in your terminal. 
+Run the following command to begin:
 `python3 main.py`
