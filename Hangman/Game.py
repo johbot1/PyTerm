@@ -9,12 +9,6 @@ import time
 import Helpers
 from HangedMan import HANGMANPICS as hm
 
-# FEEDBACK
-#FIXED fix readme (Verbose)
-#FIXED Logic instructions
-#FIXED! Success/Failure feedback for each guess
-#FIXED clear out pycache
-
 global special_characters
 special_characters = "!@#$%^&*()-+?_=,<>/;:{}\|=+`~''"""
 
