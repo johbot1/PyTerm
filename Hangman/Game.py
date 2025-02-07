@@ -37,7 +37,7 @@ def start_preamble():
 
     while preamble_state:
         try:
-            rulecheck = int(input("Do you know the rules of Hangman?:\n1) Yes 2) No: "))
+            rulecheck = int(input("Do you know the rules of Hangman?:\n1) Yes 2) No"))
             if rulecheck == 1:
                 break
             elif rulecheck == 2:
