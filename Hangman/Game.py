@@ -11,7 +11,7 @@ from HangedMan import HANGMANPICS as hm
 
 # FEEDBACK
 #FIXED fix readme (Verbose)
-# Logic instructions
+#FIXED Logic instructions
 # Success/Failure feedback for each guess
 # clear out pycache
 
@@ -37,7 +37,7 @@ def start_preamble():
 
     while preamble_state:
         try:
-            rulecheck = int(input("Do you know the rules of Hangman?:\n1) Yes 2) No"))
+            rulecheck = int(input("Do you know the rules of Hangman?:\n1) Yes 2) No "))
             if rulecheck == 1:
                 break
             elif rulecheck == 2:
@@ -46,6 +46,7 @@ def start_preamble():
                     try:
                         rulecheck2 = int(input("Shall I repeat these instructions?:\n1) Yes 2) No "))
                         if rulecheck2 == 2:
+                            preamble_state = False
                             break
                         elif rulecheck2 == 1:
                             Helpers.rules()
