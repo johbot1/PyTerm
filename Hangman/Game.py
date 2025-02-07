@@ -12,8 +12,8 @@ from HangedMan import HANGMANPICS as hm
 # FEEDBACK
 #FIXED fix readme (Verbose)
 #FIXED Logic instructions
-# Success/Failure feedback for each guess
-# clear out pycache
+#FIXED! Success/Failure feedback for each guess
+#FIXED clear out pycache
 
 global special_characters
 special_characters = "!@#$%^&*()-+?_=,<>/;:{}\|=+`~''"""
@@ -121,7 +121,10 @@ def playgame():
         if playerguess.lower() in active_word and playerguess not in progress_field:
             for index, letter in enumerate(active_word):
                 if letter == playerguess:
-                    progress_field[index] = playerguess  # Replaces the underscores with the letter guessed
+                    progress_field[index] = playerguess
+            print("CORRECT!")
+            time.sleep(0.5)
+                    # Replaces the underscores with the letter guessed
             # Once there are no more spaces to put corrected letters, the game infers you have won
             # displaying your word, and the amount of guesses it took you to solve it.
             if "_" not in progress_field:
@@ -129,12 +132,12 @@ def playgame():
                     f"Woo-hoo! You did it! You've guessed the word: {active_word.upper()} in {total_guesses} guesses!")
                 playing = False
                 break
-
         # If the guess is incorrect, the state of the hanged man will increase.
         # If the state reaches it's second to last drawing, it will warn the player
         # before making their final guess. If the final guess is wrong, kill the hangman.
         if playerguess.lower() not in active_word.lower():
             hanged_state_index += 1
+            print("INCORRECT!")
             if hanged_state_index < len(hm) - 1:
                 gallows = hm[hanged_state_index]
                 time.sleep(0.5)
