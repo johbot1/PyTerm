@@ -10,11 +10,10 @@ import Helpers
 from HangedMan import HANGMANPICS as hm
 
 # FEEDBACK
-# DONE  While replaying just start the game not enter name/learn to play
-# DONE   Numbers and incorrect feedback handled by the input
-# DONE   Put all previously guessed letters alphabetically on the screen with every input
-# DONE   Clean up github (.gitignore should be top level, remove .idea)
-# DONE   Instructions on running in terminal on README
+#FIXED fix readme (Verbose)
+# Logic instructions
+# Success/Failure feedback for each guess
+# clear out pycache
 
 global special_characters
 special_characters = "!@#$%^&*()-+?_=,<>/;:{}\|=+`~''"""
